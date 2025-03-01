@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什么</title>
+    <style>
+        body {
+            font-family: '微软雅黑';
+            text-align: center;
+            padding: 50px;
+            background: #f0f8ff;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 20px;
+        }
+        #result {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍚 今天吃什么？</h1>
+    <button onclick="pickFood()">点击生成</button>
+    <div id="result"></div>
+
+    <script>
+        // 在这里修改你的食物列表 ↓
+        const foods = [
+            "麻辣香锅", 
+            "寿喜烧", 
+            "炸鸡啤酒", 
+            "牛肉盖饭",
+            "越南河粉"
+        ];
+
+        function pickFood() {
+            const randomIndex = Math.floor(Math.random() * foods.length);
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = `🎉 推荐：${foods[randomIndex]}`;
+            
+            // 添加动画效果
+            resultDiv.style.animation = 'none';
+            setTimeout(() => {
+                resultDiv.style.animation = 'bounce 0.5s';
+            }, 10);
+        }
+    </script>
+</body>
+</html>
