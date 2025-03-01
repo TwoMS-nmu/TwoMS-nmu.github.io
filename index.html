@@ -96,28 +96,27 @@
 
     <div class="container">
         <h1>🍽️ 今天吃什么？</h1>
-        <button onclick="selectFoodType('chinese')">中餐</button>
-        <button onclick="selectFoodType('western')">西餐</button>
+        <button onclick="selectFoodType('baoliyue')">保利樾吃饭</button>
+        <button onclick="selectFoodType('yuehuijucan')">约会聚餐</button>
         <div id="result"></div>
     </div>
 
     <script>
-        // 中餐食物库
-        const chineseFoods = [
-            "🍲 火锅", "🥟 饺子", "🍜 拉面", "🍛 咖喱饭", "🥘 麻辣香锅", "🍖 烤肉", "🍚 盖浇饭", "🍙 饭团"
+        // 保利樾食物库
+        const baoliyueFoods = [
+           "🍔 塔斯汀中国汉堡", "🍔 KFC", "🍕 必胜客", "🍗 德克士", "🍛 小蹄大做猪脚饭", "🍜 秦人好面",  "🍜 佳安牛肉汤", "🌶️ 小马哥川菜馆", "🍢 小吃街",
         ];
-        // 西餐食物库
-        const westernFoods = [
-            "🍔 汉堡", "🍕 披萨", "🥩 牛排", "🍝 意大利面", "🥗 沙拉", "🥪 三明治", "🥨 法棍面包"
+        // 约会聚餐
+        const yuehuijucanFoods = [
+            "🌶️ 川菜", "🌶️ 湘菜", "🥟 东北菜", "🍛 印度菜", "🥘 韩国料理", "🍣 日式料理", "🍱 自助餐", "🥩 俄国菜", "🍲 淮扬菜", "🍲 火锅", "🍖 烤肉", "🍢 烧烤", "🐟 烤鱼", "🍢 小吃街"
         ];
-
         // 选择食物类型的函数
         function selectFoodType(type) {
             let foodList;
-            if (type === 'chinese') {
-                foodList = chineseFoods;
-            } else if (type === 'western') {
-                foodList = westernFoods;
+            if (type === 'baoliyue') {
+                foodList = baoliyueFoods;
+            } else if (type === 'yuehuijucan') {
+                foodList = yuehuijucanFoods;
             }
             const index = Math.floor(Math.random() * foodList.length);
             document.getElementById("result").innerHTML =
