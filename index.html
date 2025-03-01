@@ -1,60 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
 <head>
-    <title>高级版今天吃什么</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今日就吃这个</title>
     <style>
         body {
             font-family: '微软雅黑', sans-serif;
             text-align: center;
             padding: 20px;
             min-height: 100vh;
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2, #80deea, #4dd0e1);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
+            margin: 0;
         }
 
         @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        .container {
-            background: rgba(255, 255, 255, 0.1);
+       .container {
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 20px;
             padding: 40px;
             backdrop-filter: blur(10px);
             margin: 20px auto;
             max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         button {
             padding: 15px 40px;
             font-size: 20px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             border: 2px solid white;
-            color: white;
+            color: #333;
             border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s;
+            margin: 5px;
         }
 
         button:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.6);
             transform: scale(1.05);
         }
 
         #result {
             font-size: 36px;
-            color: white;
+            color: #333;
             margin: 30px 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.3);
         }
 
-        /* 时间日期样式 */
-        .header {
-            background: rgba(0, 0, 0, 0.2);
+       .header {
+            background: rgba(255, 255, 255, 0.3);
             padding: 20px;
             border-radius: 15px;
             margin: 20px auto;
@@ -64,17 +76,18 @@
 
         #date {
             font-size: 24px;
-            color: #ffffffcc;
+            color: #333;
         }
 
         #time {
             font-size: 56px;
             font-weight: bold;
-            color: #fff;
+            color: #333;
             letter-spacing: 2px;
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <div id="date"></div>
@@ -83,24 +96,33 @@
 
     <div class="container">
         <h1>🍽️ 今天吃什么？</h1>
-        <button onclick="pickFood()">点击生成今日美味</button>
+        <button onclick="selectFoodType('chinese')">中餐</button>
+        <button onclick="selectFoodType('western')">西餐</button>
         <div id="result"></div>
     </div>
 
     <script>
-        // 食物列表（可自定义）
-        const foods = [
-            "🍲 火锅", "🍔 汉堡", "🍣 寿司", 
-            "🥟 饺子", "🍕 披萨", "🍜 拉面",
-            "🍛 咖喱饭", "🥘 麻辣香锅", "🍖 烤肉"
+        // 中餐食物库
+        const chineseFoods = [
+            "🍲 火锅", "🥟 饺子", "🍜 拉面", "🍛 咖喱饭", "🥘 麻辣香锅", "🍖 烤肉", "🍚 盖浇饭", "🍙 饭团"
+        ];
+        // 西餐食物库
+        const westernFoods = [
+            "🍔 汉堡", "🍕 披萨", "🥩 牛排", "🍝 意大利面", "🥗 沙拉", "🥪 三明治", "🥨 法棍面包"
         ];
 
-        // 随机选择函数
-        function pickFood() {
-            const index = Math.floor(Math.random() * foods.length);
-            document.getElementById("result").innerHTML = 
-                `🎉 今日推荐：${foods[index]}`;
-            
+        // 选择食物类型的函数
+        function selectFoodType(type) {
+            let foodList;
+            if (type === 'chinese') {
+                foodList = chineseFoods;
+            } else if (type === 'western') {
+                foodList = westernFoods;
+            }
+            const index = Math.floor(Math.random() * foodList.length);
+            document.getElementById("result").innerHTML =
+                `🎉 今日推荐：${foodList[index]}`;
+
             // 添加动画
             document.getElementById("result").style.animation = 'bounce 0.5s';
         }
@@ -108,25 +130,26 @@
         // 时间日期功能
         function updateDateTime() {
             const now = new Date();
-            const dateStr = now.toLocaleDateString('zh-CN', {
+            const options = {
                 year: 'numeric',
                 month: '2-digit',
-                day: '2-digit'
-            }).replace(/\//g, '年').replace(/$/, '日');
-
-            const timeStr = now.toLocaleTimeString('zh-CN', {
-                hour12: false,
+                day: '2-digit',
                 hour: '2-digit',
                 minute: '2-digit',
-                second: '2-digit'
-            });
-
-            document.getElementById('date').textContent = dateStr;
-            document.getElementById('time').textContent = timeStr;
+                second: '2-digit',
+                hour12: false,
+                timeZone: 'Asia/Shanghai'
+            };
+            const dateTimeStr = now.toLocaleString('zh-CN', options);
+            const [datePart, timePart] = dateTimeStr.split(' ');
+            const formattedDate = datePart.replace(/\//g, '年') + '日';
+            document.getElementById('date').textContent = formattedDate;
+            document.getElementById('time').textContent = timePart;
         }
 
         setInterval(updateDateTime, 1000);
         updateDateTime();
     </script>
 </body>
+
 </html>
